@@ -48,7 +48,7 @@ jobs:
       id: docker_meta
       uses: docker/metadata-action@v5.4.0
       with:
-        images: name/app
+        images: fcogomez/comfy-ui
         tags: |
             type=ref,event=branch
             type=ref,event=pr
