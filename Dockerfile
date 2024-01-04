@@ -55,13 +55,19 @@ COPY ./h264-discord.json /workspace/ComfyUI/custom_nodes/ComfyUI-VideoHelperSuit
 RUN mkdir -p /workspace/ComfyUI/models/facerestore_models/ && wget -nc -O /workspace/ComfyUI/models/facerestore_models/codeformer.pth https://github.com/sczhou/CodeFormer/releases/download/v0.1.0/codeformer.pth
 
 RUN mkdir -p /workspace/ComfyUI/models/insightface/ 
-COPY ./models/inswapper_128.onnx /workspace/ComfyUI/models/insightface/inswapper_128.onnx
-COPY ./models/1x_ArtClarity.pth /workspace/ComfyUI/models/upscale_models/1x_ArtClarity.pth
-COPY ./models/4xLSDIRCompactv2.pth /workspace/ComfyUI/models/upscale_models/4xLSDIRCompactv2.pth
-COPY ./models/4x-Rybu.pth /workspace/ComfyUI/models/upscale_models/4x-Rybu.pth
-COPY ./models/4xPSNR.pth /workspace/ComfyUI/models/upscale_models/4xPSNR.pth
+RUN wget -nc -O /workspace/ComfyUI/models/insightface/inswapper_128.onnx https://github.com/facefusion/facefusion-assets/releases/download/models/inswapper_128.onnx
+#COPY ./models/inswapper_128.onnx /workspace/ComfyUI/models/insightface/inswapper_128.onnx
+#RUN wget -nc -O /workspace/ComfyUI/models/upscale_models/1x_ArtClarity.pth https://objectstorage.us-phoenix-1.oraclecloud.com/n/ax6ygfvpvzka/b/open-modeldb-files/o/4x-Rybu.pth
+#COPY ./models/1x_ArtClarity.pth /workspace/ComfyUI/models/upscale_models/1x_ArtClarity.pth
+#COPY ./models/4xLSDIRCompactv2.pth /workspace/ComfyUI/models/upscale_models/4xLSDIRCompactv2.pth
+RUN wget -nc -O /workspace/ComfyUI/models/upscale_models/4x-Rybu.pth https://objectstorage.us-phoenix-1.oraclecloud.com/n/ax6ygfvpvzka/b/open-modeldb-files/o/4x-Rybu.pth
+#COPY ./models/4x-Rybu.pth /workspace/ComfyUI/models/upscale_models/4x-Rybu.pth 
+RUN wget -nc -O /workspace/ComfyUI/models/upscale_models/4xPSNR.pth https://huggingface.co/uwg/upscaler/resolve/main/ESRGAN/4xPSNR.pth
+#COPY ./models/4xPSNR.pth /workspace/ComfyUI/models/upscale_models/4xPSNR.pth
 
-COPY ./models/embeddings/* /workspace/ComfyUI/models/embeddings/
+RUN mkdir -p /workspace/ComfyUI/models/cc,vm/
+#RUN mkdir -p /workspace/ComfyUI/models/embeddings/
+#COPY ./models/embeddings/* /workspace/ComfyUI/models/embeddings/
 RUN mkdir -p /workspace/ComfyUI/input/negatives
 COPY ./negative_prompts/* /workspace/ComfyUI/input/negatives/
 

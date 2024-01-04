@@ -5,6 +5,7 @@ on:
     branches:
       - 'main'
     paths:
+      - '.github/workflows/**'
       - 'negative_prompts/**'
       - 'Dockerfile'
       - '.zshrc'
@@ -16,6 +17,7 @@ on:
     branches:
       - 'main'
     paths:
+      - '.github/workflows/**'
       - 'negative_prompts/**'
       - 'Dockerfile'
       - '.zshrc'
