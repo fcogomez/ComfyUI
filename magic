@@ -2,7 +2,7 @@
 set -e
 
 fun_echo() {
-  toilet -w 90 -f term --awesomepanda -F border: $1 
+  toilet -w 90 -f term --gay -F border: $1 
 }
 
 if [ ! -d "/storage" ]; then
