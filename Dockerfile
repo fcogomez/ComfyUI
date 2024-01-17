@@ -22,7 +22,7 @@ COPY ./.zshrc /root/.zshrc
 
 WORKDIR  /workspace/
 
-RUN git clone https://github.com/comfyanonymous/ComfyUI.git /workspace/ComfyUI && cd ComfyUI && git reset --hard 777f6b15225197898a5f49742682a2be859072d7
+RUN git clone https://github.com/comfyanonymous/ComfyUI.git /workspace/ComfyUI
 RUN git clone https://github.com/ltdrdata/ComfyUI-Manager.git /workspace/ComfyUI/custom_nodes/ComfyUI-Manager
 
 
