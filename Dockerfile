@@ -88,4 +88,8 @@ RUN mv /opt/conda/bin/ffmpeg /opt/conda/bin/ffmpeg-ancient
 RUN ln -s /usr/bin/ffmpeg /opt/conda/bin/ffmpeg
 WORKDIR /storage/ComfyUI
 
+RUN pip install flask flask_bootstrap
+
+COPY ./queue_api.py /queue_api.py
+COPY ./workflows /workflows
 CMD ["/bin/magic"]
