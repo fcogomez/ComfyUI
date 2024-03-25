@@ -19,6 +19,44 @@ docker run -d --name comfyui --restart=unless-stopped -p 8188:8188 --gpus all -i
 
 ## Features
 
+### Simple Rest API
+
+This docker container features a simple server that allows you to save a workflow as an API workflow,
+store it in the workflows dir, and then make a special mapping file. 
+
+The mapping file should contain the HTTP POST parameter you want to use to replace a value inside of 
+the API file. See the default mapping.
+
+If you want to test this out, add `-p 5000:5000` to the above `docker run` and try curl requests like the following:
+
+`curl -X POST --header "Content-Type: application/json"  http://localhost:5000/workflow/default_workflow -d '{"prompt": "cyberpunk spiderman"}'`
+
+This would return something like the following JSON packet:
+
+`{"jobId":"ffd044e3-67cc-4a0a-bceb-9328cfa4edd6","ok":true}`
+
+Use this jobId to poll the status of the job:
+
+`curl http://localhost:5000/status/ffd044e3-67cc-4a0a-bceb-9328cfa4edd6`
+
+`{"job":{"returnvalue":{"images":["http://localhost:5000/download/job_ffd044e3-67cc-4a0a-bceb-9328cfa4edd6_00001_.png"]}},"state":"completed"}`
+
+And use the download route to view it in your browser or download it via your code.
+
+`http://localhost:5000/download/job_ffd044e3-67cc-4a0a-bceb-9328cfa4edd6_00001_.png`
+
+#### Hosting ComfyUI? Setting the URL for the downloads:
+
+If you are hosting ComfyUI on a remote machine like RunPod or any other cloud GPU provider,
+simply pass in the base url via environment variables, by adding the following to your `docker run` command:
+
+`-e "BASE_URL=http://my.cloud.gpu.host.com:5000"`
+
+Now, when viewing the json results of a job, you'll see the base url replaced:
+
+`{"job":{"returnvalue":{"images":["http://my.cloud.gpu.host.com:5000/download/job_ffd044e3-67cc-4a0a-bceb-9328cfa4edd6_00001_.png"]}},"state":"completed"}`
+
+
 ### Prepackaged Custom Nodes
 
 Popular custom nodes:

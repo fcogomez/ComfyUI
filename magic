@@ -107,5 +107,11 @@ yq e '.custom_nodes[]' $yaml | while read -r repo; do
   fi
 done
 
+fun_echo "Preparing Simple Queue Server"
+cp /queue_api.py /storage/queue_api.py
+cp -r /workflows /storage/
+
+cd /storage && python queue_api.py &
+
 fun_echo "Starting ComfyUI..."
 cd /storage/ComfyUI && python main.py --listen 0.0.0.0 --extra-model-paths-config /extra_model_paths.yml --disable-xformers
